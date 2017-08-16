@@ -1,5 +1,6 @@
 <?php
-include 'header.php'; include 'nav.php';    include __DIR__.'/core/connection.php'; ?>
+include 'header.php';
+include 'nav.php';    include __DIR__.'/core/connection.php'; ?>
 
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
@@ -21,7 +22,7 @@ include 'header.php'; include 'nav.php';    include __DIR__.'/core/connection.ph
       <form class="col s12" method="post" action="minichat_post.php">
             <div class="row">
           <div class="input-field col s12">
-            <input type="text" class="validate" name="pseudo">
+            <input type="text" class="validate" name="pseudo" value="<?php if(isset($_COOKIE['name'])){ echo  $_COOKIE['name']; }else{echo "false";} ?>">
             <label for="pseudo">pseudo</label>
           </div>
           <div class="input-field col s12">
@@ -37,12 +38,13 @@ include 'header.php'; include 'nav.php';    include __DIR__.'/core/connection.ph
       <br><br>
 
   <!-- Display the chats-->
-  <?php   $select = $db->query('select * from chat limit 0,10'); ?>
+  <?php   $select = $db->query('SELECT pseudo, message, DATE_FORMAT(`date`, "%d/%m/%Y %Hh %i min %s s") AS date FROM chat ORDER BY `date` DESC'); ?>
 
       <ul class="collection">
         <?php while($chat = $select->fetch()){ ?>
         <li class="collection-item avatar">
           <img src="images/yuna.jpg" alt="" class="circle">
+          <span class="date">  <?php echo $chat['date']; ?> </span></br>
           <span class="title">  <?php echo $chat['pseudo']; ?> </span>
           <p><?php echo $chat['message']; ?> </p>
         </li>

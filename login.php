@@ -1,16 +1,14 @@
-  <?php require"header.php"; ?>
-  <?php require"nav.php"; ?>
-  <?php require"title.html"; ?>
+  <?php require"header.php";  require"nav.php"; require"title.html"; ?>
 
   <div class="container">
   <div class="row">
-
-<?php
-if(isset($_COOKIE['name'])){
-  echo "Cookie name : ". $_COOKIE['name'];
-}else {
-  echo "Votre Cookie n'existe pas!";
-}
+  <?php
+  
+    if(isset($_COOKIE['name'])){
+      echo "Cookie name : ". $_COOKIE['name'];
+    }else {
+      echo "Votre Cookie n'existe pas!";
+    }
  ?>
     <form class="col s12" method="post" action="security.php">
           <div class="row">
